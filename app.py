@@ -1,4 +1,5 @@
 # create item based on name using post method, get specific item or list of items using get method, update item using put and delete item using del method.
+import os
 
 from flask import Flask
 from flask_restful import Api
@@ -10,7 +11,7 @@ from resources.item import Item,ItemList
 from resources.store import Store, StoreList
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # turn off flask SQLAlchemy modification.
 app.secret_key = 'key123'
 api = Api(app)
